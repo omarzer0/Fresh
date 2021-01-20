@@ -10,4 +10,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
     }
+
+    //fragmentManager?.beginTransaction()?.replace(R.id.mainActivityFrameContainer, ProductDetailsFragment())
+//                ?.addToBackStack("f")?.commit()
 }

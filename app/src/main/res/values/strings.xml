@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Fresh</string>
-    <string name="shopping_cart">Shopping cart</string>
+    <string name="shopping_cart">Shopping Cart</string>
     <string name="search">Search</string>
     <string name="coffee">Coffee</string>
     <string name="tea">Tea</string>
     <string name="cream">Cream</string>
     <string name="freeze">Freeze</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="check_out">Check Out</string>
 </resources>
