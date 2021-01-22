@@ -7,4 +7,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+<!--    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">-->
+<!--        <item name="materialThemeOverlay">@style/MainColorButtonThemeOverlay</item>-->
+<!--    </style>-->
+
+<!--    <style name="MainColorButtonThemeOverlay">-->
+<!--        <item name="colorPrimary">@color/mainColor</item>-->
+<!--    </style>-->
 </resources>
