@@ -29,15 +29,16 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shoppingCartRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/shoppingCardCheckOutBTN"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
         tools:listitem="@layout/product_item" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/shoppingCardCheckOutBTN"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
