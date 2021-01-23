@@ -91,7 +91,7 @@
                 android:layout_width="100dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="60dp"
+                android:layout_marginBottom="40dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/textView3"
@@ -171,7 +171,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/medium"
-                        android:textColor="@color/mainColor"
+                        android:textColor="@color/secondaryColor"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/productDetailsMediumTextML"
@@ -227,12 +227,12 @@
                         android:text="@string/large"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toTopOf="@+id/productLargeMediumTextML"
+                        app:layout_constraintBottom_toTopOf="@+id/productDetailsLargeTextML"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <TextView
-                        android:id="@+id/productLargeMediumTextML"
+                        android:id="@+id/productDetailsLargeTextML"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
@@ -255,21 +255,22 @@
                 android:text="@string/sugar_level"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/productDetailsSugar0"
+                app:layout_constraintBottom_toTopOf="@+id/productDetailsSugar0CardView"
                 app:layout_constraintStart_toStartOf="parent" />
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/productDetailsSugar0"
+                android:id="@+id/productDetailsSugar0CardView"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="60dp"
+                android:layout_marginBottom="40dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintStart_toStartOf="@+id/textView3">
 
                 <TextView
+                    android:id="@+id/productDetailsSugar0TextTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -282,18 +283,19 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/productDetailsSugar25"
+                android:id="@+id/productDetailsSugar25CardView"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 app:cardBackgroundColor="@color/selectedBackground"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/productDetailsSugar0"
+                app:layout_constraintBottom_toBottomOf="@+id/productDetailsSugar0CardView"
                 app:layout_constraintEnd_toStartOf="@+id/guideline7"
-                app:layout_constraintStart_toEndOf="@+id/productDetailsSugar0"
-                app:layout_constraintTop_toTopOf="@+id/productDetailsSugar0">
+                app:layout_constraintStart_toEndOf="@+id/productDetailsSugar0CardView"
+                app:layout_constraintTop_toTopOf="@+id/productDetailsSugar0CardView">
 
                 <TextView
+                    android:id="@+id/productDetailsSugar25TextTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -305,16 +307,17 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/productDetailsSugar50"
+                android:id="@+id/productDetailsSugar50CardView"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/productDetailsSugar0"
+                app:layout_constraintBottom_toBottomOf="@+id/productDetailsSugar0CardView"
                 app:layout_constraintStart_toStartOf="@+id/guideline7"
-                app:layout_constraintTop_toTopOf="@+id/productDetailsSugar0">
+                app:layout_constraintTop_toTopOf="@+id/productDetailsSugar0CardView">
 
                 <TextView
+                    android:id="@+id/productDetailsSugar50TextTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -328,16 +331,17 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/productDetailsSugar100"
+                android:id="@+id/productDetailsSugar100CardView"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/productDetailsSugar0"
+                app:layout_constraintBottom_toBottomOf="@+id/productDetailsSugar0CardView"
                 app:layout_constraintEnd_toEndOf="@+id/productDetailsLargeCardView"
-                app:layout_constraintTop_toTopOf="@+id/productDetailsSugar0">
+                app:layout_constraintTop_toTopOf="@+id/productDetailsSugar0CardView">
 
                 <TextView
+                    android:id="@+id/productDetailsSugar100TextTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -354,7 +358,7 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/quantity_button_shape"
                 android:weightSum="5"
                 app:layout_constraintBottom_toBottomOf="parent"
