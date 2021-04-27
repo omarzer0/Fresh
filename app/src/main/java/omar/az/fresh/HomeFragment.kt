@@ -4,195 +4,111 @@ import android.content.Context
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
     // coffee = 1,  tea = 2,    cream = 3,  freeze = 4
-    private var selectedCardViewNumber = 1;
+    private var previousSelectedCardViewNumber = 1;
     private var eightDp = 16f;
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         eightDp = convertFloatToDp()
+
         addCardViewListeners()
 
     }
 
-    private fun addCardViewListeners() {
-        coffeeCardView.setOnClickListener {
-            if (selectedCardViewNumber != 1) {
-                setSelectedStyle(1)
-                unSetSelectedStyle(selectedCardViewNumber)
-                selectedCardViewNumber = 1
-            }
+    fun addCardViewListeners() {
+        coffeeCardView.setOnClickListener(this)
+        teaCardView.setOnClickListener(this)
+        creamCardView.setOnClickListener(this)
+        freezeCardView.setOnClickListener(this)
+    }
+
+    fun setCardClickListener(selectedNumber: Int) {
+        unSetSelectedStyle(previousSelectedCardViewNumber)
+        setSelectedStyle(selectedNumber)
+        previousSelectedCardViewNumber = selectedNumber
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.coffeeCardView -> setCardClickListener(1)
+            R.id.teaCardView -> setCardClickListener(2)
+            R.id.creamCardView -> setCardClickListener(3)
+            R.id.freezeCardView -> setCardClickListener(4)
         }
-        teaCardView.setOnClickListener {
-            if (selectedCardViewNumber != 2) {
-                setSelectedStyle(2)
-                unSetSelectedStyle(selectedCardViewNumber)
-                selectedCardViewNumber = 2
-            }
-        }
-        creamCardView.setOnClickListener {
-            if (selectedCardViewNumber != 3) {
-                setSelectedStyle(3)
-                unSetSelectedStyle(selectedCardViewNumber)
-                selectedCardViewNumber = 3
-            }
-        }
-        freezeCardView.setOnClickListener {
-            if (selectedCardViewNumber != 4) {
-                setSelectedStyle(4)
-                unSetSelectedStyle(selectedCardViewNumber)
-                selectedCardViewNumber = 4
-            }
-        }
+    }
+
+
+    private fun selectCard(
+        cardView: CardView,
+        imageView: ImageView,
+        image: Int,
+        textView: TextView
+    ) {
+        cardView.setCardBackgroundColor(
+            ContextCompat.getColor(
+                (activity as Context),
+                R.color.mainColor
+            )
+        )
+        cardView.cardElevation = 0F
+        textView.setTextColor(
+            ContextCompat.getColor(
+                (activity as Context),
+                android.R.color.white
+            )
+        )
+        imageView.setImageResource(image)
     }
 
     private fun setSelectedStyle(newSelectedCardViewNumber: Int) {
         when (newSelectedCardViewNumber) {
-            1 -> {
-                coffeeCardView.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        R.color.mainColor
-                    )
-                )
-                coffeeCardView.cardElevation = 0F
-                coffeeTv.setTextColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        android.R.color.white
-                    )
-                )
-                coffeeImg.setImageResource(R.drawable.ic_coffee_mug_white)
-            }
+            1 -> selectCard(coffeeCardView, coffeeImg, R.drawable.ic_coffee_mug_white, coffeeTv)
 
-            2 -> {
-                teaCardView.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        R.color.mainColor
-                    )
-                )
-                teaCardView.cardElevation = 0F
-                teaTv.setTextColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        android.R.color.white
-                    )
-                )
-                teaImg.setImageResource(R.drawable.ic_tea_cup_white)
-            }
+            2 -> selectCard(teaCardView, teaImg, R.drawable.ic_tea_cup_white, teaTv)
 
-            3 -> {
-                creamCardView.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        R.color.mainColor
-                    )
-                )
-                creamCardView.cardElevation = 0F
-                creamTv.setTextColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        android.R.color.white
-                    )
-                )
-                creamImg.setImageResource(R.drawable.ic_ice_cream_white)
-            }
+            3 -> selectCard(creamCardView, creamImg, R.drawable.ic_ice_cream_white, creamTv)
 
-            4 -> {
-                freezeCardView.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        R.color.mainColor
-                    )
-                )
-                freezeCardView.cardElevation = 0F
-                freezeTv.setTextColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        android.R.color.white
-                    )
-                )
-                freezeImg.setImageResource(R.drawable.ic_frappe_white)
-            }
+            4 -> selectCard(freezeCardView, freezeImg, R.drawable.ic_frappe_white, freezeTv)
         }
+    }
+
+    private fun unSelectCard(
+        cardView: CardView,
+        imageView: ImageView,
+        image: Int,
+        textView: TextView
+    ) {
+        cardView.setCardBackgroundColor(
+            ContextCompat.getColor(
+                (activity as Context),
+                android.R.color.white
+            )
+        )
+        cardView.cardElevation = eightDp
+        textView.setTextColor(
+            ContextCompat.getColor(
+                (activity as Context),
+                R.color.textDarkSecondary
+            )
+        )
+        imageView.setImageResource(image)
     }
 
     private fun unSetSelectedStyle(oldSelectedCardViewNumber: Int) {
         when (oldSelectedCardViewNumber) {
-            1 -> {
-                coffeeCardView.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        android.R.color.white
-                    )
-                )
-                coffeeCardView.cardElevation = eightDp
-                coffeeTv.setTextColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        R.color.textDarkSecondary
-                    )
-                )
-                coffeeImg.setImageResource(R.drawable.ic_coffee_mug)
-            }
-
-            2 -> {
-                teaCardView.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        android.R.color.white
-                    )
-                )
-                teaCardView.cardElevation = eightDp
-                teaTv.setTextColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        R.color.textDarkSecondary
-                    )
-                )
-                teaImg.setImageResource(R.drawable.ic_tea_cup)
-            }
-
-            3 -> {
-                creamCardView.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        android.R.color.white
-                    )
-                )
-                creamCardView.cardElevation = eightDp
-                creamTv.setTextColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        R.color.textDarkSecondary
-                    )
-                )
-                creamImg.setImageResource(R.drawable.ic_ice_cream)
-            }
-
-            4 -> {
-                freezeCardView.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        android.R.color.white
-                    )
-                )
-                freezeCardView.cardElevation = eightDp
-                freezeTv.setTextColor(
-                    ContextCompat.getColor(
-                        (activity as Context),
-                        R.color.textDarkSecondary
-                    )
-                )
-                freezeImg.setImageResource(R.drawable.ic_frappe)
-            }
+            1 -> unSelectCard(coffeeCardView, coffeeImg, R.drawable.ic_coffee_mug, coffeeTv)
+            2 -> unSelectCard(teaCardView, teaImg, R.drawable.ic_tea_cup, teaTv)
+            3 -> unSelectCard(creamCardView, creamImg, R.drawable.ic_ice_cream, creamTv)
+            4 -> unSelectCard(freezeCardView, freezeImg, R.drawable.ic_frappe, freezeTv)
         }
     }
 
