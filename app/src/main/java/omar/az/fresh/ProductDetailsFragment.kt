@@ -1,14 +1,17 @@
 package omar.az.fresh
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_product_details.*
+import omar.az.fresh.pojo.Product
 
-class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
+class ProductDetailsFragment(private val product: Product) :
+    Fragment(R.layout.fragment_product_details) {
 
     private var size = 2
     private var sugarLevel = 2
@@ -16,6 +19,13 @@ class ProductDetailsFragment : Fragment(R.layout.fragment_product_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        productDetailsImage.setImageResource(product.image)
+        productDetailsNameTV.text = product.name
+        productDetailsPriceTV.text = product.smallPrice.toString()
+        cl_details_fragment_root_view.setBackgroundColor(
+            Color.parseColor(product.backgroundColor)
+        )
 
         eightDp = convertFloatToDp()
         addSugarCardViewListeners()
