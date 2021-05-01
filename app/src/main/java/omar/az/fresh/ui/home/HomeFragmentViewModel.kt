@@ -14,7 +14,6 @@ class HomeFragmentViewModel : ViewModel() {
 
     init {
         _productList.postValue(coffeeList)
-        Log.e("TAG", "created")
     }
 
 
@@ -33,7 +32,6 @@ class HomeFragmentViewModel : ViewModel() {
 
 private val coffeeList = List(100) {
     Product(
-        it.toLong(),
         "coffee cup drink",
         "description",
         R.drawable.lavender,
@@ -46,7 +44,6 @@ private val coffeeList = List(100) {
 
 private val teaList = List(100) {
     Product(
-        it.toLong(),
         "tea",
         "description",
         R.drawable.lavender,
@@ -58,7 +55,6 @@ private val teaList = List(100) {
 }
 private val creamList = List(100) {
     Product(
-        it.toLong(),
         "cream",
         "description",
         R.drawable.lavender,
@@ -70,7 +66,6 @@ private val creamList = List(100) {
 }
 private val freezeList = List(100) {
     Product(
-        it.toLong(),
         "freeze",
         "description",
         R.drawable.lavender,

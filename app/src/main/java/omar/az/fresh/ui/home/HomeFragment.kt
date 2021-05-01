@@ -2,7 +2,6 @@ package omar.az.fresh.ui.home
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
@@ -16,7 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
-import omar.az.fresh.ProductDetailsFragment
+import omar.az.fresh.ui.details.ProductDetailsFragment
 import omar.az.fresh.R
 import omar.az.fresh.ShoppingCartFragment
 import omar.az.fresh.adapter.ProductAdapter
