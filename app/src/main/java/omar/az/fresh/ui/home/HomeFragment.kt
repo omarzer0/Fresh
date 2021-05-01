@@ -2,6 +2,7 @@ package omar.az.fresh.ui.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
@@ -10,21 +11,22 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import omar.az.fresh.ProductDetailsFragment
 import omar.az.fresh.R
+import omar.az.fresh.ShoppingCartFragment
 import omar.az.fresh.adapter.ProductAdapter
-import omar.az.fresh.pojo.Product
 
 
 class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
     // coffee = 1,  tea = 2,    cream = 3,  freeze = 4
     private val homeFragmentViewModel: HomeFragmentViewModel by viewModels()
-    private var previousSelectedCardViewNumber = 1;
-    private var eightDp = 16f;
+    private var previousSelectedCardViewNumber = 1
+    private var eightDp = 16f
     private lateinit var productAdapter: ProductAdapter
 
 
@@ -35,6 +37,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
         addCardViewListeners()
         setRecyclerView()
         setClickListeners()
+
+        setSelectedStyle(previousSelectedCardViewNumber)
 
         homeFragmentViewModel.productList.observe(viewLifecycleOwner, Observer {
             productAdapter.submitList(it)
@@ -62,6 +66,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
 
     private fun setClickListeners() {
         productAdapter.setOnProductBodyClickListener { product ->
+
+        }
+
+        productAdapter.setOnAddButtonClickListener { product ->
+//            Toast.makeText(context, "button", Toast.LENGTH_SHORT).show()
             fragmentManager?.beginTransaction()
                 ?.add(
                     R.id.mainActivityFrameContainer,
@@ -70,17 +79,13 @@ class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
                 ?.addToBackStack("f")?.commit()
         }
 
-        productAdapter.setOnAddButtonClickListener {
-            Toast.makeText(context, "button", Toast.LENGTH_SHORT).show()
-        }
-
         shoppingCartImg.setOnClickListener {
-//            fragmentManager?.beginTransaction()
-//                ?.add(
-//                    R.id.mainActivityFrameContainer,
-//                    ProductDetailsFragment()
-//                )
-//                ?.addToBackStack("f")?.commit()
+            fragmentManager?.beginTransaction()
+                ?.replace(
+                    R.id.mainActivityFrameContainer,
+                    ShoppingCartFragment()
+                )
+                ?.addToBackStack("f")?.commit()
         }
     }
 

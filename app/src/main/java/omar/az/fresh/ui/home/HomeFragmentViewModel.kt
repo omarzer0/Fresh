@@ -1,5 +1,6 @@
 package omar.az.fresh.ui.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +14,7 @@ class HomeFragmentViewModel : ViewModel() {
 
     init {
         _productList.postValue(coffeeList)
+        Log.e("TAG", "created")
     }
 
 
@@ -32,7 +34,7 @@ class HomeFragmentViewModel : ViewModel() {
 private val coffeeList = List(100) {
     Product(
         it.toLong(),
-        "coffee",
+        "coffee cup drink",
         "description",
         R.drawable.lavender,
         "#BCF8BC",

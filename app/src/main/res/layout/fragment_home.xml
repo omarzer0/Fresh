@@ -102,10 +102,12 @@
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_margin="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="@color/mainColor"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="0dp">
+                app:cardElevation="8dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="false">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -116,7 +118,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_margin="8dp"
-                        android:src="@drawable/ic_coffee_mug_white"
+                        android:src="@drawable/ic_coffee_mug"
                         app:layout_constraintBottom_toTopOf="@+id/coffeeTv"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +132,7 @@
                         android:layout_marginBottom="16dp"
                         android:gravity="center"
                         android:text="@string/coffee"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/textDarkSecondary"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
