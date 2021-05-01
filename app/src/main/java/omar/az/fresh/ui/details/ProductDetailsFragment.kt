@@ -11,15 +11,19 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_product_details.*
 import omar.az.fresh.R
+import omar.az.fresh.db.ProductDatabase
 import omar.az.fresh.pojo.Product
+import omar.az.fresh.repository.ProductRepository
 
 class ProductDetailsFragment(private val product: Product) :
     Fragment(R.layout.fragment_product_details), View.OnClickListener {
 
     private val detailsViewModel: ProductDetailsViewModel by viewModels()
+
 
     private var oldChoiceSize = 2
     private var oldSugarLevelChoice = 2
@@ -75,11 +79,24 @@ class ProductDetailsFragment(private val product: Product) :
     }
 
 
-    private fun addToCart(){
-
+    private fun addToCart() {
+        val numberOfItems: Int = productDetailsQuantityTextTV.text.toString().toInt()
+        val chosenPrice: Double = productDetailsPriceTV.text.toString().toDouble()
+        detailsViewModel.insertProduct(
+            Product(
+                product.name,
+                product.description,
+                product.image,
+                product.backgroundColor,
+                product.smallPrice,
+                product.mediumPrice,
+                product.largePrice,
+                numberOfItems,
+                chosenPrice,
+                oldSugarLevelChoice
+            )
+        )
     }
-
-
 
 
     private fun addCardsClickListeners() {

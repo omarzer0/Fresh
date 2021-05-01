@@ -6,18 +6,16 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import omar.az.fresh.ui.details.ProductDetailsFragment
 import omar.az.fresh.R
-import omar.az.fresh.ShoppingCartFragment
+import omar.az.fresh.ui.cart.ShoppingCartFragment
 import omar.az.fresh.adapter.ProductAdapter
 
 
