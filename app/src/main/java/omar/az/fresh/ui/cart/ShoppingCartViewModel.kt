@@ -15,4 +15,7 @@ class ShoppingCartViewModel(application: Application) : AndroidViewModel(applica
 
     fun getAllProducts() = productRepository.getAllProducts()
 
+    fun deleteProduct(id: Long) = viewModelScope.launch {
+        productRepository.deleteProduct(id)
+    }
 }

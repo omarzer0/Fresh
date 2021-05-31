@@ -8,18 +8,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
-import omar.az.fresh.ui.details.ProductDetailsFragment
+import omar.az.fresh.BaseFragment
 import omar.az.fresh.R
-import omar.az.fresh.ui.cart.ShoppingCartFragment
 import omar.az.fresh.adapter.ProductAdapter
+import omar.az.fresh.ui.cart.ShoppingCartFragment
+import omar.az.fresh.ui.details.ProductDetailsFragment
+import omar.az.fresh.utils.Utils
 
 
-class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
+class HomeFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_home), View.OnClickListener {
     // coffee = 1,  tea = 2,    cream = 3,  freeze = 4
     private val homeFragmentViewModel: HomeFragmentViewModel by viewModels()
     private var previousSelectedCardViewNumber = 1
@@ -33,12 +34,19 @@ class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
 
         addCardViewListeners()
         setRecyclerView()
-        setClickListeners()
+        setClickListeners(view)
 
         setSelectedStyle(previousSelectedCardViewNumber)
 
         homeFragmentViewModel.productList.observe(viewLifecycleOwner, Observer {
             productAdapter.submitList(it)
+        })
+
+        homeFragmentViewModel.getNumberOfProductsInCart().observe(viewLifecycleOwner, Observer {
+            if (it != null && it > 0) {
+                cartBadge.visibility = View.VISIBLE
+                cartBadge.text = "$it"
+            } else cartBadge.visibility = View.INVISIBLE
         })
 
     }
@@ -61,28 +69,24 @@ class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
         }
     }
 
-    private fun setClickListeners() {
+    private fun setClickListeners(view: View) {
         productAdapter.setOnProductBodyClickListener { product ->
-
-        }
-
-        productAdapter.setOnAddButtonClickListener { product ->
-//            Toast.makeText(context, "button", Toast.LENGTH_SHORT).show()
-            fragmentManager?.beginTransaction()
-                ?.add(
+            parentFragmentManager.beginTransaction()
+                .add(
                     R.id.mainActivityFrameContainer,
-                    ProductDetailsFragment(product)
+                    ProductDetailsFragment(product, true)
                 )
-                ?.addToBackStack("f")?.commit()
+                .addToBackStack("detailsFragment").commit()
         }
+
 
         shoppingCartImg.setOnClickListener {
-            fragmentManager?.beginTransaction()
-                ?.replace(
+            parentFragmentManager.beginTransaction()
+                .replace(
                     R.id.mainActivityFrameContainer,
                     ShoppingCartFragment()
                 )
-                ?.addToBackStack("f")?.commit()
+                .addToBackStack("f").commit()
         }
     }
 
@@ -123,7 +127,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
             )
         )
         imageView.setImageResource(image)
-//        setRecyclerViewData(newData)
         homeFragmentViewModel.getListOfProducts(productListId)
     }
 
