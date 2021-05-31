@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,7 +35,7 @@ class HomeFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_home), Vie
 
         addCardViewListeners()
         setRecyclerView()
-        setClickListeners(view)
+        setClickListeners()
 
         setSelectedStyle(previousSelectedCardViewNumber)
 
@@ -69,7 +70,7 @@ class HomeFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_home), Vie
         }
     }
 
-    private fun setClickListeners(view: View) {
+    private fun setClickListeners() {
         productAdapter.setOnProductBodyClickListener { product ->
             parentFragmentManager.beginTransaction()
                 .add(
