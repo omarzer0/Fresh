@@ -1,6 +1,5 @@
 package omar.az.fresh.adapter
 
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.product_item.view.*
 import omar.az.fresh.R
 import omar.az.fresh.pojo.Product
+import omar.az.fresh.utils.Utils
 
-class ProductAdapter(private val isInDetailsFragment: Boolean) :
+class ProductAdapter(private val fromCartFragment: Boolean) :
     ListAdapter<Product, ProductAdapter.ProductViewHolder>(diffUtilCallback()) {
 
 
@@ -34,18 +34,28 @@ class ProductAdapter(private val isInDetailsFragment: Boolean) :
             productImageImg.setImageResource(currentItem.image)
             productNameTV.text = currentItem.name
             productDescriptionTV.text = currentItem.description
-            productPriceTV.text = currentItem.smallPrice.toString()
+
             setOnClickListener { onProductBodyClickListener?.let { it(currentItem) } }
 
-            if (isInDetailsFragment) {
-                productCartQuantityViewLL.visibility = View.VISIBLE
+            if (fromCartFragment) {
+                productRemoveItemButton.visibility = View.VISIBLE
+                productPriceTV.text = currentItem.finalPrice.toString()
+                cl_root_view.setOnClickListener {
+                    onProductBodyClickListener?.let {
+                        it(currentItem)
+                    }
+                }
+
+                productRemoveItemButton.setOnClickListener {
+                    onProductRemoveButtonClickListener?.let { it(currentItem.id!!) }
+                }
+
             } else {
                 productAddButton.visibility = View.VISIBLE
+                productPriceTV.text = currentItem.chosenPrice.toString()
                 productAddButton.setOnClickListener {
-                    onProductAddButtonClickListener?.let {
-                        it(
-                            currentItem
-                        )
+                    onProductBodyClickListener?.let {
+                        it(currentItem)
                     }
                 }
             }
@@ -53,20 +63,20 @@ class ProductAdapter(private val isInDetailsFragment: Boolean) :
     }
 
     private var onProductBodyClickListener: ((Product) -> Unit)? = null
-    private var onProductAddButtonClickListener: ((Product) -> Unit)? = null
+    private var onProductRemoveButtonClickListener: ((Long) -> Unit)? = null
 
     fun setOnProductBodyClickListener(listener: (Product) -> Unit) {
         onProductBodyClickListener = listener
     }
 
-    fun setOnAddButtonClickListener(listener: (Product) -> Unit) {
-        onProductAddButtonClickListener = listener
+    fun setOnRemoveButtonClickListener(listener: (Long) -> Unit) {
+        onProductRemoveButtonClickListener = listener
     }
 }
 
 fun diffUtilCallback(): ItemCallback<Product> = object : DiffUtil.ItemCallback<Product>() {
     override fun areItemsTheSame(oldItem: Product, newItem: Product) =
-        oldItem.name + oldItem.description == newItem.name + newItem.description
+        oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: Product, newItem: Product) = oldItem == newItem
 

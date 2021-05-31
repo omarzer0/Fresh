@@ -13,9 +13,11 @@ data class Product(
     val smallPrice: Double,
     val mediumPrice: Double,
     val largePrice: Double,
-    val numberOfItems: Int = 0,
-    val chosenPrice: Double = 0.0,
-    val chosenSugarLevel: Int = 1,
+    var numberOfItems: Int = 1,
+    val chosenPrice: Double = smallPrice,
+    val chosenSugarLevel: Int = 2,
+    val chosenCupSizeLevel: Int = 1,
+    val finalPrice: Double = 0.0,
     @PrimaryKey(autoGenerate = true)
     val id: Long? = null
 )

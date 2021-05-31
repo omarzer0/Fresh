@@ -3,24 +3,24 @@ package omar.az.fresh.ui.details
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_product_details.*
+import omar.az.fresh.BaseFragment
 import omar.az.fresh.R
-import omar.az.fresh.db.ProductDatabase
 import omar.az.fresh.pojo.Product
-import omar.az.fresh.repository.ProductRepository
 
-class ProductDetailsFragment(private val product: Product) :
-    Fragment(R.layout.fragment_product_details), View.OnClickListener {
+
+class ProductDetailsFragment(private val product: Product, private val isInsert: Boolean) :
+    BaseFragment(product.backgroundColor, R.layout.fragment_product_details), View.OnClickListener {
 
     private val detailsViewModel: ProductDetailsViewModel by viewModels()
 
@@ -32,29 +32,50 @@ class ProductDetailsFragment(private val product: Product) :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         setDataToViews()
-        setSelectedSizeCardStyle(oldChoiceSize)
         eightDp = convertFloatToDp()
-        addCardsClickListeners()
+        addClickListeners()
 
         detailsViewModel.choiceSize.observe(viewLifecycleOwner, Observer {
-            productDetailsPriceTV.text = when (it) {
-                1 -> product.smallPrice.toString()
-                2 -> product.mediumPrice.toString()
-                3 -> product.largePrice.toString()
-                else -> "UnAvailable"
-            }
+            productDetailsPriceTV.text =
+                (detailsViewModel.tempInputNumber.value?.times(getPriceText(it))).toString()
         })
+
+
+        detailsViewModel.tempInputNumber.observe(viewLifecycleOwner, Observer { itemCount ->
+            productDetailsPriceTV.text = (itemCount.times(getPriceText(oldChoiceSize))).toString()
+        })
+
 
     }
 
+    private fun getPriceText(size: Int): Double =
+        when (size) {
+            1 -> (product.smallPrice)
+            2 -> (product.mediumPrice)
+            3 -> (product.largePrice)
+            else -> 0.0
+        }
+
+
     private fun setDataToViews() {
+        Log.e("TAG", "$product")
         productDetailsImage.setImageResource(product.image)
         productDetailsNameTV.text = product.name
-        productDetailsPriceTV.text = product.mediumPrice.toString()
+        productDetailsPriceTV.text = product.finalPrice.toString()
+        productDetailsQuantityTextTV.text = product.numberOfItems.toString()
+        detailsViewModel.tempInputNumber.postValue(product.numberOfItems)
+        oldChoiceSize = product.chosenCupSizeLevel
+        setSizeCardListener(oldChoiceSize)
+        setSugarCardListener(product.chosenSugarLevel)
         cl_details_fragment_root_view.setBackgroundColor(
             Color.parseColor(product.backgroundColor)
         )
+
+        if (isInsert) addToCardBtn.text = getString(R.string.add_to_cart)
+        else addToCardBtn.text = getText(R.string.edit_item)
     }
 
 
@@ -75,15 +96,20 @@ class ProductDetailsFragment(private val product: Product) :
             R.id.productDetailsSugar100CardView -> setSugarCardListener(4)
 
             R.id.addToCardBtn -> addToCart()
+            R.id.productDetailsQuantityPlusBTN -> increaseItem()
+            R.id.productDetailsQuantityMinusBTN -> decreaseItem()
+
         }
     }
 
 
     private fun addToCart() {
+        var toastMessage = ""
         val numberOfItems: Int = productDetailsQuantityTextTV.text.toString().toInt()
         val chosenPrice: Double = productDetailsPriceTV.text.toString().toDouble()
-        detailsViewModel.insertProduct(
-            Product(
+
+        if (isInsert) {
+            val tempProduct = Product(
                 product.name,
                 product.description,
                 product.image,
@@ -93,13 +119,49 @@ class ProductDetailsFragment(private val product: Product) :
                 product.largePrice,
                 numberOfItems,
                 chosenPrice,
-                oldSugarLevelChoice
+                oldSugarLevelChoice,
+                oldChoiceSize,
+                (numberOfItems * getPriceText(oldChoiceSize))
             )
-        )
+            detailsViewModel.insertProduct(tempProduct)
+            toastMessage = getString(R.string.added_successfully)
+        } else {
+            detailsViewModel.updateProduct(
+                product.id ?: -1,
+                numberOfItems,
+                oldChoiceSize,
+                oldSugarLevelChoice,
+                (numberOfItems * getPriceText(oldChoiceSize))
+            )
+            toastMessage = getString(R.string.edited_successfully)
+        }
+        val toast = Toast(activity)
+        toast.apply {
+            cancel()
+            setText(toastMessage)
+            duration = Toast.LENGTH_SHORT
+            show()
+        }
+        parentFragmentManager.popBackStack()
     }
 
+    private fun increaseItem() {
+        var temp = productDetailsQuantityTextTV.text.toString().toInt()
+        temp++
+        productDetailsQuantityTextTV.text = temp.toString()
+        detailsViewModel.tempInputNumber.postValue(temp)
+    }
 
-    private fun addCardsClickListeners() {
+    private fun decreaseItem() {
+        var temp = productDetailsQuantityTextTV.text.toString().toInt()
+        if (temp > 1) {
+            temp--
+            productDetailsQuantityTextTV.text = temp.toString()
+            detailsViewModel.tempInputNumber.postValue(temp)
+        }
+    }
+
+    private fun addClickListeners() {
         productDetailsSmallCardView.setOnClickListener(this)
         productDetailsMediumCardView.setOnClickListener(this)
         productDetailsLargeCardView.setOnClickListener(this)
@@ -110,6 +172,8 @@ class ProductDetailsFragment(private val product: Product) :
         productDetailsSugar100CardView.setOnClickListener(this)
 
         addToCardBtn.setOnClickListener(this)
+        productDetailsQuantityPlusBTN.setOnClickListener(this)
+        productDetailsQuantityMinusBTN.setOnClickListener(this)
     }
 
     private fun setSizeCardListener(selectedNumber: Int) {
@@ -226,6 +290,8 @@ class ProductDetailsFragment(private val product: Product) :
         )
         cardView.elevation = 0f
         imageView.setImageResource(R.drawable.ic_frappe_main_color)
+        oldChoiceSize = selectedSize
+        Log.e("TAG3", "$oldChoiceSize")
         detailsViewModel.choiceSize.postValue(selectedSize)
     }
 
@@ -234,6 +300,7 @@ class ProductDetailsFragment(private val product: Product) :
         unSelectedSugarCardStyle(oldSugarLevelChoice)
         selectedSugarCardStyle(selectedNumber)
         oldSugarLevelChoice = selectedNumber
+        Log.e("TAG", "setSugarCardListener: $oldSugarLevelChoice")
     }
 
     private fun unSelectedSugarCardStyle(oldSugarSelectedNumber: Int) {

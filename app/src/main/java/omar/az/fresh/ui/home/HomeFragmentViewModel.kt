@@ -1,19 +1,25 @@
 package omar.az.fresh.ui.home
 
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import kotlinx.coroutines.launch
 import omar.az.fresh.R
+import omar.az.fresh.db.ProductDatabase
 import omar.az.fresh.pojo.Product
+import omar.az.fresh.repository.ProductRepository
 
-class HomeFragmentViewModel : ViewModel() {
+class HomeFragmentViewModel(application: Application) : AndroidViewModel(application) {
+    private val productRepository = ProductRepository(ProductDatabase(application))
     private val _productList = MutableLiveData<List<Product>>()
     val productList: LiveData<List<Product>>
         get() = _productList
 
+    fun getNumberOfProductsInCart() = productRepository.getNumberOfProductsInCart()
+
     init {
         _productList.postValue(coffeeList)
+
     }
 
 

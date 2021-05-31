@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
@@ -58,20 +59,20 @@
                     android:background="@drawable/cart_notification_shape"
                     android:gravity="center"
                     android:padding="3dp"
-                    android:text="0"
+                    android:text="@string/zero"
                     android:textColor="@android:color/white"
                     android:textSize="10sp" />
             </FrameLayout>
 
-            <ImageView
-                android:id="@+id/searchImg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_search"
-                app:layout_constraintBottom_toBottomOf="@+id/textView"
-                app:layout_constraintEnd_toStartOf="@+id/shoppingCartImg"
-                app:layout_constraintTop_toTopOf="@+id/textView" />
+            <!--            <ImageView-->
+            <!--                android:id="@+id/searchImg"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginEnd="16dp"-->
+            <!--                android:src="@drawable/ic_search"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/textView"-->
+            <!--                app:layout_constraintEnd_toStartOf="@+id/shoppingCartImg"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/textView" />-->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -102,9 +103,9 @@
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                android:layout_marginTop="8dp"
 
                 android:layout_weight="1"
                 app:cardCornerRadius="8dp"

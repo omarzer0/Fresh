@@ -19,9 +19,14 @@
     <string name="large">Large</string>
     <string name="_250ml">250ml</string>
     <string name="sugar_level">Sugar Level</string>
+    <string name="zero">0</string>
     <string name="_0">0%</string>
     <string name="_25">25%</string>
     <string name="_50">50%</string>
     <string name="_100">100%</string>
     <string name="dollar_sign">$</string>
+    <string name="added_successfully">Added to the cart successfully!</string>
+    <string name="edited_successfully">Edited successfully!</string>
+    <string name="deleted_successfully">deleted successfully!</string>
+    <string name="edit_item">Edit Product</string>
 </resources>

@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="@android:color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_details_fragment_root_view"
@@ -144,9 +145,9 @@
                 android:id="@+id/productDetailsMediumCardView"
                 android:layout_width="100dp"
                 android:layout_height="120dp"
-                app:cardBackgroundColor="@color/selectedBackground"
+                app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="0dp"
+                app:cardElevation="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline7"
                 app:layout_constraintStart_toStartOf="@+id/guideline7"
                 app:layout_constraintTop_toTopOf="@+id/productDetailsSmallCardView">
@@ -160,7 +161,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:padding="12dp"
-                        android:src="@drawable/ic_frappe_main_color"
+                        android:src="@drawable/ic_frappe"
                         app:layout_constraintBottom_toTopOf="@+id/productDetailsMediumTextTitle"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -172,7 +173,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/medium"
-                        android:textColor="@color/secondaryColor"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/productDetailsMediumTextML"
@@ -185,7 +185,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:text="@string/_175ml"
-                        android:textColor="@color/secondaryColor"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -282,7 +281,8 @@
                     android:layout_marginBottom="16dp"
                     android:layout_weight="1"
                     app:cardCornerRadius="8dp"
-                    app:cardElevation="8dp">
+                    app:cardElevation="8dp"
+                    >
 
                     <TextView
                         android:id="@+id/productDetailsSugar0TextTV"
@@ -304,9 +304,9 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="16dp"
                     android:layout_weight="1"
-                    app:cardBackgroundColor="@color/selectedBackground"
                     app:cardCornerRadius="8dp"
-                    app:cardElevation="0dp">
+                    app:cardElevation="8dp"
+                    >
 
                     <TextView
                         android:id="@+id/productDetailsSugar25TextTV"
@@ -314,7 +314,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:text="@string/_25"
-                        android:textColor="@color/secondaryColor"
                         android:textSize="18sp"
                         android:textStyle="bold" />
                 </androidx.cardview.widget.CardView>
@@ -403,7 +402,7 @@
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/productDetailsQuantityMinussBTN"
+                    android:id="@+id/productDetailsQuantityMinusBTN"
                     android:layout_width="25dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
