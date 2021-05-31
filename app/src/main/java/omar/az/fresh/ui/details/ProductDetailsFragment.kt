@@ -8,7 +8,6 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -17,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_product_details.*
 import omar.az.fresh.BaseFragment
 import omar.az.fresh.R
 import omar.az.fresh.pojo.Product
+import omar.az.fresh.utils.Utils
 
 
 class ProductDetailsFragment(private val product: Product, private val isInsert: Boolean) :
@@ -135,12 +135,8 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
             )
             toastMessage = getString(R.string.edited_successfully)
         }
-        val toast = Toast(activity)
-        toast.apply {
-            cancel()
-            setText(toastMessage)
-            duration = Toast.LENGTH_SHORT
-            show()
+        activity?.let { activity ->
+            Utils.showMyToast(activity, toastMessage)
         }
         parentFragmentManager.popBackStack()
     }

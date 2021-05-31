@@ -2,7 +2,6 @@ package omar.az.fresh.ui.cart
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,7 +36,6 @@ class ShoppingCartFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_sh
     }
 
     private fun setClickListeners() {
-        val toast = Toast(activity)
         productAdapter.setOnProductBodyClickListener { product ->
             parentFragmentManager.beginTransaction()
                 .add(
@@ -49,13 +47,10 @@ class ShoppingCartFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_sh
 
         productAdapter.setOnRemoveButtonClickListener {
             shoppingCartViewModel.deleteProduct(it)
-            toast.apply {
-                cancel()
-                setText(getString(R.string.deleted_successfully))
-                duration = Toast.LENGTH_SHORT
-                show()
-            }
 
+            activity?.let { activity ->
+                Utils.showMyToast(activity, getString(R.string.deleted_successfully))
+            }
         }
     }
 }
