@@ -79,13 +79,32 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="200dp"
             android:layout_margin="16dp"
-            app:cardBackgroundColor="@color/mainColor"
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" >
+
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:layoutDirection="locale" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabIndicatorHeight="0dp"/>
+
+
+        </androidx.cardview.widget.CardView>
 
 
         <LinearLayout

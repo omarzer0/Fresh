@@ -61,7 +61,6 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
 
 
     private fun setDataToViews() {
-        Log.e("TAG", "$product")
         productDetailsImage.setImageResource(product.image)
         productDetailsNameTV.text = product.name
         productDetailsPriceTV.text = product.finalPrice.toString()
@@ -287,7 +286,6 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
         cardView.elevation = 0f
         imageView.setImageResource(R.drawable.ic_frappe_main_color)
         oldChoiceSize = selectedSize
-        Log.e("TAG3", "$oldChoiceSize")
         detailsViewModel.choiceSize.postValue(selectedSize)
     }
 
@@ -296,7 +294,6 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
         unSelectedSugarCardStyle(oldSugarLevelChoice)
         selectedSugarCardStyle(selectedNumber)
         oldSugarLevelChoice = selectedNumber
-        Log.e("TAG", "setSugarCardListener: $oldSugarLevelChoice")
     }
 
     private fun unSelectedSugarCardStyle(oldSugarSelectedNumber: Int) {

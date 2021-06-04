@@ -37,12 +37,10 @@ class ShoppingCartFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_sh
 
     private fun setClickListeners() {
         productAdapter.setOnProductBodyClickListener { product ->
-            parentFragmentManager.beginTransaction()
-                .add(
-                    R.id.mainActivityFrameContainer,
-                    ProductDetailsFragment(product, false)
-                )
-                .addToBackStack("detailFragment").commit()
+            Utils.transitionFragment(
+                parentFragmentManager, ProductDetailsFragment
+                    (product, false), "detailFragment"
+            )
         }
 
         productAdapter.setOnRemoveButtonClickListener {
