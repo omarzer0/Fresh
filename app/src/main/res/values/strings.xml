@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">Fresh</string>
+    <string name="shopping_cart">Shopping Cart</string>
+    <string name="search">Search</string>
+    <string name="coffee">Coffee</string>
+    <string name="tea">Tea</string>
+    <string name="cream">Cream</string>
+    <string name="freeze">Freeze</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="check_out">Check Out</string>
+    <string name="choice_size">Choice Size</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="_1">1</string>
+    <string name="small">Small</string>
+    <string name="_125ml">125ml</string>
+    <string name="medium">Medium</string>
+    <string name="_175ml">175ml</string>
+    <string name="large">Large</string>
+    <string name="_250ml">250ml</string>
+    <string name="sugar_level">Sugar Level</string>
+    <string name="zero">0</string>
+    <string name="_0">0%</string>
+    <string name="_25">25%</string>
+    <string name="_50">50%</string>
+    <string name="_100">100%</string>
+    <string name="dollar_sign">$</string>
+    <string name="added_successfully">Added to the cart successfully!</string>
+    <string name="edited_successfully">Edited successfully!</string>
+    <string name="deleted_successfully">deleted successfully!</string>
+    <string name="edit_item">Edit Product</string>
 </resources>
