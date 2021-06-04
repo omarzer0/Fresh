@@ -10,7 +10,6 @@ import omar.az.fresh.repository.ProductRepository
 class ShoppingCartViewModel(application: Application) : AndroidViewModel(application) {
 
     private val productRepository = ProductRepository(ProductDatabase(application))
-//    private val allProducts = MutableLiveData<List<Product>>()
 
 
     fun getAllProducts() = productRepository.getAllProducts()
