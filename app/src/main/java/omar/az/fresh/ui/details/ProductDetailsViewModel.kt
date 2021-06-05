@@ -1,15 +1,20 @@
 package omar.az.fresh.ui.details
 
-import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import omar.az.fresh.db.ProductDatabase
 import omar.az.fresh.pojo.Product
 import omar.az.fresh.repository.ProductRepository
+import javax.inject.Inject
 
-class ProductDetailsViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class ProductDetailsViewModel @Inject constructor(
+    private val productRepository: ProductRepository
+) : ViewModel() {
 
-    private val productRepository = ProductRepository(ProductDatabase(application))
+    //    private val productRepository = ProductRepository(ProductDatabase(application))
     val choiceSize: MutableLiveData<Int> = MutableLiveData(1)
     val tempInputNumber: MutableLiveData<Int> = MutableLiveData(0)
 
@@ -17,8 +22,13 @@ class ProductDetailsViewModel(application: Application) : AndroidViewModel(appli
         productRepository.insertProduct(product)
     }
 
-    fun updateProduct(id: Long, numberOfItems: Int, cupSize: Int, sugarLevel: Int, finalPrice:Double)
-    = viewModelScope.launch {
-        productRepository.updateProduct(id,numberOfItems,cupSize,sugarLevel,finalPrice)
+    fun updateProduct(
+        id: Long,
+        numberOfItems: Int,
+        cupSize: Int,
+        sugarLevel: Int,
+        finalPrice: Double
+    ) = viewModelScope.launch {
+        productRepository.updateProduct(id, numberOfItems, cupSize, sugarLevel, finalPrice)
     }
 }
