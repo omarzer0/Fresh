@@ -3,7 +3,6 @@ package omar.az.fresh.ui.details
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
@@ -54,15 +53,15 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
 
     private fun getPriceText(size: Int): Double =
         when (size) {
-            1 -> (product.smallPrice)
-            2 -> (product.mediumPrice)
-            3 -> (product.largePrice)
+            1 -> (product.smallSizePrice)
+            2 -> (product.mediumSizePrice)
+            3 -> (product.largeSizePrice)
             else -> 0.0
         }
 
 
     private fun setDataToViews() {
-        productDetailsImage.setImageResource(product.image)
+        productDetailsImage.setImageResource(product.imageUrl)
         productDetailsNameTV.text = product.name
         productDetailsPriceTV.text = product.finalPrice.toString()
         productDetailsQuantityTextTV.text = product.numberOfItems.toString()
@@ -112,11 +111,11 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
             val tempProduct = Product(
                 product.name,
                 product.description,
-                product.image,
+                product.imageUrl,
                 product.backgroundColor,
-                product.smallPrice,
-                product.mediumPrice,
-                product.largePrice,
+                product.smallSizePrice,
+                product.mediumSizePrice,
+                product.largeSizePrice,
                 numberOfItems,
                 chosenPrice,
                 oldSugarLevelChoice,

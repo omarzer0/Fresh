@@ -31,7 +31,7 @@ class ProductAdapter(private val fromCartFragment: Boolean) :
             productItemCardViewBackgroundCV
                 .setCardBackgroundColor(Color.parseColor(currentItem.backgroundColor))
 
-            productImageImg.setImageResource(currentItem.image)
+            productImageImg.setImageResource(currentItem.imageUrl)
             productNameTV.text = currentItem.name
             productDescriptionTV.text = currentItem.description
 
