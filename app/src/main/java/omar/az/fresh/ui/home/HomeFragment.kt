@@ -2,7 +2,6 @@ package omar.az.fresh.ui.home
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
@@ -12,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 import omar.az.fresh.BaseFragment
 import omar.az.fresh.R
@@ -21,10 +21,11 @@ import omar.az.fresh.ui.cart.ShoppingCartFragment
 import omar.az.fresh.ui.details.ProductDetailsFragment
 import omar.az.fresh.utils.Utils
 
-
+@AndroidEntryPoint
 class HomeFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_home), View.OnClickListener {
     // coffee = 1,  tea = 2,    cream = 3,  freeze = 4
     private val homeFragmentViewModel: HomeFragmentViewModel by viewModels()
+
     private var previousSelectedCardViewNumber = 1
     private var eightDp = 16f
     private lateinit var productAdapter: ProductAdapter

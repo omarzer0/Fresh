@@ -7,7 +7,9 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 open class BaseFragment(private val color: String, layout: Int) : Fragment(layout) {
 
 

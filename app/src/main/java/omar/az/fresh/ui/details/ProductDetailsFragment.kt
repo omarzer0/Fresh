@@ -12,13 +12,14 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_product_details.*
 import omar.az.fresh.BaseFragment
 import omar.az.fresh.R
 import omar.az.fresh.pojo.Product
 import omar.az.fresh.utils.Utils
 
-
+@AndroidEntryPoint
 class ProductDetailsFragment(private val product: Product, private val isInsert: Boolean) :
     BaseFragment(product.backgroundColor, R.layout.fragment_product_details), View.OnClickListener {
 

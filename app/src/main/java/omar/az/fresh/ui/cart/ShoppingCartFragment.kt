@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_shopping_cart.*
 import omar.az.fresh.BaseFragment
 import omar.az.fresh.R
@@ -12,6 +13,7 @@ import omar.az.fresh.adapter.ProductAdapter
 import omar.az.fresh.ui.details.ProductDetailsFragment
 import omar.az.fresh.utils.Utils
 
+@AndroidEntryPoint
 class ShoppingCartFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_shopping_cart) {
     private lateinit var productAdapter: ProductAdapter
     private val shoppingCartViewModel: ShoppingCartViewModel by viewModels()

@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager
 import omar.az.fresh.R
 
 object Utils {
+    const val DATABASE_NAME = "Product.db"
     const val whiteColor = "#FFFFFF"
     private var mToast: Toast? = null
 

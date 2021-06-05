@@ -1,16 +1,21 @@
 package omar.az.fresh.ui.home
 
-import android.app.Application
-import android.util.Log
-import androidx.lifecycle.*
-import kotlinx.coroutines.launch
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ViewModelScoped
 import omar.az.fresh.R
-import omar.az.fresh.db.ProductDatabase
 import omar.az.fresh.pojo.Product
 import omar.az.fresh.repository.ProductRepository
+import javax.inject.Inject
 
-class HomeFragmentViewModel(application: Application) : AndroidViewModel(application) {
-    private val productRepository = ProductRepository(ProductDatabase(application))
+@HiltViewModel
+class HomeFragmentViewModel @Inject constructor(
+    private val productRepository: ProductRepository
+) : ViewModel() {
+    //    private val productRepository = ProductRepository(ProductDatabase(application))
     private val _productList = MutableLiveData<List<Product>>()
     val productList: LiveData<List<Product>>
         get() = _productList
