@@ -3,7 +3,6 @@ package omar.az.fresh.ui.details
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
@@ -18,6 +17,7 @@ import omar.az.fresh.BaseFragment
 import omar.az.fresh.R
 import omar.az.fresh.pojo.Product
 import omar.az.fresh.utils.Utils
+import omar.az.fresh.utils.Utils.defaultColorForWhiteBg
 
 @AndroidEntryPoint
 class ProductDetailsFragment(private val product: Product, private val isInsert: Boolean) :
@@ -25,15 +25,12 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
 
     private val detailsViewModel: ProductDetailsViewModel by viewModels()
 
-
     private var oldChoiceSize = 2
     private var oldSugarLevelChoice = 2
     private var eightDp = 16f
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
         setDataToViews()
         eightDp = convertFloatToDp()
@@ -44,25 +41,22 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
                 (detailsViewModel.tempInputNumber.value?.times(getPriceText(it))).toString()
         })
 
-
         detailsViewModel.tempInputNumber.observe(viewLifecycleOwner, Observer { itemCount ->
             productDetailsPriceTV.text = (itemCount.times(getPriceText(oldChoiceSize))).toString()
         })
-
-
     }
 
     private fun getPriceText(size: Int): Double =
         when (size) {
-            1 -> (product.smallPrice)
-            2 -> (product.mediumPrice)
-            3 -> (product.largePrice)
+            1 -> (product.smallSizePrice)
+            2 -> (product.mediumSizePrice)
+            3 -> (product.largeSizePrice)
             else -> 0.0
         }
 
 
     private fun setDataToViews() {
-        productDetailsImage.setImageResource(product.image)
+        productDetailsImage.setImageResource(product.imageUrl)
         productDetailsNameTV.text = product.name
         productDetailsPriceTV.text = product.finalPrice.toString()
         productDetailsQuantityTextTV.text = product.numberOfItems.toString()
@@ -70,8 +64,13 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
         oldChoiceSize = product.chosenCupSizeLevel
         setSizeCardListener(oldChoiceSize)
         setSugarCardListener(product.chosenSugarLevel)
+
+        var backgroundColor = defaultColorForWhiteBg
+        if (product.backgroundColor.toLowerCase() != "#ffffff")
+            backgroundColor = product.backgroundColor
+
         cl_details_fragment_root_view.setBackgroundColor(
-            Color.parseColor(product.backgroundColor)
+            Color.parseColor(backgroundColor)
         )
 
         if (isInsert) addToCardBtn.text = getString(R.string.add_to_cart)
@@ -112,11 +111,11 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
             val tempProduct = Product(
                 product.name,
                 product.description,
-                product.image,
+                product.imageUrl,
                 product.backgroundColor,
-                product.smallPrice,
-                product.mediumPrice,
-                product.largePrice,
+                product.smallSizePrice,
+                product.mediumSizePrice,
+                product.largeSizePrice,
                 numberOfItems,
                 chosenPrice,
                 oldSugarLevelChoice,
