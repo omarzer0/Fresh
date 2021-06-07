@@ -22,4 +22,6 @@ class ProductRepository @Inject constructor(
     fun getAllProducts() = dao.getAllProducts()
 
     fun getNumberOfProductsInCart() = dao.getNumberOfProductsInCart()
+
+    fun getTotalPrice() = dao.getTotalPrice()
 }

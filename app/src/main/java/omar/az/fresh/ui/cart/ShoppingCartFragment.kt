@@ -26,6 +26,19 @@ class ShoppingCartFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_sh
         shoppingCartViewModel.getAllProducts().observe(viewLifecycleOwner, Observer {
             productAdapter.submitList(it)
         })
+
+        shoppingCartViewModel.getTotalPrice().observe(viewLifecycleOwner, Observer { total ->
+            if (total == 0.0 || total == null) {
+                tv_car_empty_cart_fragment.visibility = View.VISIBLE
+                shoppingCartRecyclerView.visibility = View.GONE
+                shoppingCardCheckOutBTN.visibility = View.GONE
+            } else {
+                tv_car_empty_cart_fragment.visibility = View.GONE
+                shoppingCartRecyclerView.visibility = View.VISIBLE
+                shoppingCardCheckOutBTN.visibility = View.VISIBLE
+                shoppingCardCheckOutBTN.text = getString(R.string.total) +total
+            }
+        })
     }
 
     private fun setUpRecyclerView() {

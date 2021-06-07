@@ -17,6 +17,7 @@ import omar.az.fresh.BaseFragment
 import omar.az.fresh.R
 import omar.az.fresh.pojo.Product
 import omar.az.fresh.utils.Utils
+import omar.az.fresh.utils.Utils.defaultColorForWhiteBg
 
 @AndroidEntryPoint
 class ProductDetailsFragment(private val product: Product, private val isInsert: Boolean) :
@@ -24,15 +25,12 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
 
     private val detailsViewModel: ProductDetailsViewModel by viewModels()
 
-
     private var oldChoiceSize = 2
     private var oldSugarLevelChoice = 2
     private var eightDp = 16f
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
         setDataToViews()
         eightDp = convertFloatToDp()
@@ -43,12 +41,9 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
                 (detailsViewModel.tempInputNumber.value?.times(getPriceText(it))).toString()
         })
 
-
         detailsViewModel.tempInputNumber.observe(viewLifecycleOwner, Observer { itemCount ->
             productDetailsPriceTV.text = (itemCount.times(getPriceText(oldChoiceSize))).toString()
         })
-
-
     }
 
     private fun getPriceText(size: Int): Double =
@@ -69,8 +64,13 @@ class ProductDetailsFragment(private val product: Product, private val isInsert:
         oldChoiceSize = product.chosenCupSizeLevel
         setSizeCardListener(oldChoiceSize)
         setSugarCardListener(product.chosenSugarLevel)
+
+        var backgroundColor = defaultColorForWhiteBg
+        if (product.backgroundColor.toLowerCase() != "#ffffff")
+            backgroundColor = product.backgroundColor
+
         cl_details_fragment_root_view.setBackgroundColor(
-            Color.parseColor(product.backgroundColor)
+            Color.parseColor(backgroundColor)
         )
 
         if (isInsert) addToCardBtn.text = getString(R.string.add_to_cart)

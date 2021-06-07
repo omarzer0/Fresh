@@ -14,7 +14,6 @@ class ProductDetailsViewModel @Inject constructor(
     private val productRepository: ProductRepository
 ) : ViewModel() {
 
-    //    private val productRepository = ProductRepository(ProductDatabase(application))
     val choiceSize: MutableLiveData<Int> = MutableLiveData(1)
     val tempInputNumber: MutableLiveData<Int> = MutableLiveData(0)
 

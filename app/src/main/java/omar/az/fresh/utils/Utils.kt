@@ -9,6 +9,7 @@ import omar.az.fresh.R
 object Utils {
     const val DATABASE_NAME = "Product.db"
     const val whiteColor = "#FFFFFF"
+    const val defaultColorForWhiteBg = "#ededd0"
     private var mToast: Toast? = null
 
     fun showMyToast(context: Context, text: String) {
@@ -24,10 +25,10 @@ object Utils {
     ) {
         parentFragmentManager.beginTransaction()
             .setCustomAnimations(
-                android.R.anim.fade_in,
-                android.R.anim.fade_out,
-                android.R.anim.fade_in,
-                android.R.anim.fade_out
+                R.anim.fade_in,
+                R.anim.fade_out,
+                R.anim.fade_in,
+                R.anim.fade_out
             )
             .add(
                 R.id.mainActivityFrameContainer,

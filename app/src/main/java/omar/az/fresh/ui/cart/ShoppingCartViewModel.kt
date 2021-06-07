@@ -15,10 +15,9 @@ class ShoppingCartViewModel @Inject constructor(
     private val productRepository:ProductRepository
 ) : ViewModel() {
 
-//    private val productRepository = ProductRepository(ProductDatabase(application))
-
-
     fun getAllProducts() = productRepository.getAllProducts()
+
+    fun getTotalPrice() = productRepository.getTotalPrice()
 
     fun deleteProduct(id: Long) = viewModelScope.launch {
         productRepository.deleteProduct(id)

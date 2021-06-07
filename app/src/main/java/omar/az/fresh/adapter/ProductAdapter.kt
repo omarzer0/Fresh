@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.product_item.view.*
 import omar.az.fresh.R
 import omar.az.fresh.pojo.Product
-import omar.az.fresh.utils.Utils
 
 class ProductAdapter(private val fromCartFragment: Boolean) :
     ListAdapter<Product, ProductAdapter.ProductViewHolder>(diffUtilCallback()) {
@@ -39,6 +38,17 @@ class ProductAdapter(private val fromCartFragment: Boolean) :
 
             if (fromCartFragment) {
                 productRemoveItemButton.visibility = View.VISIBLE
+                tv_number_of_items_cart_fragment.text = "${currentItem.numberOfItems}"
+                tv_hashtag_cart_fragment.visibility = View.VISIBLE
+
+                if (currentItem.backgroundColor.toLowerCase() != "#ffffff"){
+                    val color = Color.parseColor(currentItem.backgroundColor)
+                    tv_number_of_items_cart_fragment.setTextColor(color)
+                    tv_hashtag_cart_fragment.setTextColor(color)
+                    productPriceTV.setTextColor(color)
+                    tv_dollar_sign.setTextColor(color)
+                }
+
                 productPriceTV.text = currentItem.finalPrice.toString()
                 cl_root_view.setOnClickListener {
                     onProductBodyClickListener?.let {

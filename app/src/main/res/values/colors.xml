@@ -10,4 +10,6 @@
     <color name="textDarkSecondary">#8A000000</color> <!--8A for %54 opacity-->
     <color name="textDarkDisabled">#61000000</color>
     <color name="selectedBackground">#FBD6D9</color> <!--61 for %38 opacity-->
+
+    <color name="myTextColor">@android:color/black</color>
 </resources>

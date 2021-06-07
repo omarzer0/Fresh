@@ -12,7 +12,9 @@
         android:id="@+id/cl_details_fragment_root_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@android:color/holo_green_dark">
+        android:background="@android:color/white"
+        tools:background="@android:color/holo_green_dark"
+        >
 
         <ImageView
             android:id="@+id/productDetailsImage"
@@ -23,47 +25,11 @@
             android:scaleType="fitXY"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/lavender" />
 
-        <TextView
-            android:id="@+id/productDetailsNameTV"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:maxLines="2"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/guideline6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/productDetailsImage"
-            tools:text="Lavender lovely juice" />
 
-
-        <TextView
-            android:id="@+id/productDetailsPriceCurrencyTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="$"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/productDetailsNameTV"
-            app:layout_constraintTop_toBottomOf="@+id/productDetailsNameTV" />
-
-        <TextView
-            android:id="@+id/productDetailsPriceTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/productDetailsPriceCurrencyTV"
-            app:layout_constraintTop_toBottomOf="@+id/productDetailsNameTV"
-            tools:text="6.50" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
@@ -75,25 +41,67 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
+                android:id="@+id/productDetailsNameTV"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="16dp"
+                android:maxLines="2"
+                android:textColor="@color/mainColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:ellipsize="none"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintBottom_toTopOf="@+id/textView2"
+                app:layout_constraintEnd_toStartOf="@+id/productDetailsPriceCurrencyTV"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Lavender lovely juice" />
+
+
+            <TextView
+                android:id="@+id/productDetailsPriceCurrencyTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dollar_sign"
+                android:textColor="@color/mainColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/productDetailsPriceTV"
+                app:layout_constraintEnd_toStartOf="@+id/productDetailsPriceTV"
+                app:layout_constraintTop_toTopOf="@+id/productDetailsPriceTV" />
+
+            <TextView
+                android:id="@+id/productDetailsPriceTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/mainColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/productDetailsNameTV"
+                app:layout_constraintEnd_toEndOf="@+id/productDetailsLargeCardView"
+                app:layout_constraintTop_toTopOf="@+id/productDetailsNameTV"
+                tools:text="6.50" />
+
+            <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/choice_size"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/productDetailsSmallCardView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/productDetailsSmallCardView"
                 android:layout_width="100dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="32dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/textView3"
@@ -251,7 +259,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
                 android:text="@string/sugar_level"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -262,8 +269,8 @@
                 android:id="@+id/sugar_container_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
                 android:weightSum="4"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -435,13 +442,6 @@
                 app:layout_constraintGuide_percent="0.5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
