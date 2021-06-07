@@ -31,4 +31,7 @@ interface ProductDao {
 
     @Query("SELECT sum(numberOfItems) FROM products")
     fun getNumberOfProductsInCart(): LiveData<Int>
+
+    @Query("SELECT sum(finalPrice) FROM products")
+    fun getTotalPrice(): LiveData<Double>
 }

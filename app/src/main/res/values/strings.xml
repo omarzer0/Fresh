@@ -29,4 +29,7 @@
     <string name="edited_successfully">Edited successfully!</string>
     <string name="deleted_successfully">deleted successfully!</string>
     <string name="edit_item">Edit Product</string>
+    <string name="x_sign">x</string>
+    <string name="cart_is_empty">Cart is empty!</string>
+    <string name="total">Total: $</string>
 </resources>

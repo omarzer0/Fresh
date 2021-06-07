@@ -1,17 +1,27 @@
 package omar.az.fresh.repository
 
-import omar.az.fresh.db.ProductDatabase
+import omar.az.fresh.db.ProductDao
 import omar.az.fresh.pojo.Product
+import javax.inject.Inject
 
-class ProductRepository(private val db: ProductDatabase) {
-    suspend fun insertProduct(product: Product) = db.getArticleDao().insert(product)
+class ProductRepository @Inject constructor(
+    private val dao: ProductDao
+) {
+    suspend fun insertProduct(product: Product) = dao.insert(product)
 
-    suspend fun updateProduct(id: Long, numberOfItems: Int, cupSize: Int, sugarLevel: Int ,finalPrice:Double)
-    = db.getArticleDao().update(id, numberOfItems,cupSize,sugarLevel,finalPrice)
+    suspend fun updateProduct(
+        id: Long,
+        numberOfItems: Int,
+        cupSize: Int,
+        sugarLevel: Int,
+        finalPrice: Double
+    ) = dao.update(id, numberOfItems, cupSize, sugarLevel, finalPrice)
 
-    suspend fun deleteProduct(id: Long) = db.getArticleDao().delete(id)
+    suspend fun deleteProduct(id: Long) = dao.delete(id)
 
-    fun getAllProducts() = db.getArticleDao().getAllProducts()
+    fun getAllProducts() = dao.getAllProducts()
 
-    fun getNumberOfProductsInCart() = db.getArticleDao().getNumberOfProductsInCart()
+    fun getNumberOfProductsInCart() = dao.getNumberOfProductsInCart()
+
+    fun getTotalPrice() = dao.getTotalPrice()
 }

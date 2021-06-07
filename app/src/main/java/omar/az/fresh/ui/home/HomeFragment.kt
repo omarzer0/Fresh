@@ -8,22 +8,24 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 import omar.az.fresh.BaseFragment
 import omar.az.fresh.R
 import omar.az.fresh.adapter.ProductAdapter
+import omar.az.fresh.adapter.ViewPagerAdapter
 import omar.az.fresh.ui.cart.ShoppingCartFragment
 import omar.az.fresh.ui.details.ProductDetailsFragment
 import omar.az.fresh.utils.Utils
 
-
+@AndroidEntryPoint
 class HomeFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_home), View.OnClickListener {
     // coffee = 1,  tea = 2,    cream = 3,  freeze = 4
     private val homeFragmentViewModel: HomeFragmentViewModel by viewModels()
+
     private var previousSelectedCardViewNumber = 1
     private var eightDp = 16f
     private lateinit var productAdapter: ProductAdapter
@@ -36,6 +38,7 @@ class HomeFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_home), Vie
         addCardViewListeners()
         setRecyclerView()
         setClickListeners()
+        setUpSlider()
 
         setSelectedStyle(previousSelectedCardViewNumber)
 
@@ -60,6 +63,13 @@ class HomeFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_home), Vie
         freezeCardView.setOnClickListener(this)
     }
 
+    private fun setUpSlider() {
+        val viewPagerAdapter = ViewPagerAdapter(parentFragmentManager)
+        val tabLayout = tab_dots
+        val viewPager = pager
+        viewPager.adapter = viewPagerAdapter
+        tabLayout.setupWithViewPager(viewPager)
+    }
 
     private fun setRecyclerView() {
         productAdapter = ProductAdapter(false)
@@ -72,22 +82,15 @@ class HomeFragment : BaseFragment(Utils.whiteColor, R.layout.fragment_home), Vie
 
     private fun setClickListeners() {
         productAdapter.setOnProductBodyClickListener { product ->
-            parentFragmentManager.beginTransaction()
-                .add(
-                    R.id.mainActivityFrameContainer,
-                    ProductDetailsFragment(product, true)
-                )
-                .addToBackStack("detailsFragment").commit()
+            Utils.transitionFragment(
+                parentFragmentManager, ProductDetailsFragment(product, true), "detailsFragment"
+            )
         }
 
-
         shoppingCartImg.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(
-                    R.id.mainActivityFrameContainer,
-                    ShoppingCartFragment()
-                )
-                .addToBackStack("f").commit()
+            Utils.transitionFragment(
+                parentFragmentManager, ShoppingCartFragment(), "detailsFragment"
+            )
         }
     }
 
