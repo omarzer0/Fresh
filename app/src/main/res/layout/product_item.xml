@@ -60,7 +60,7 @@
         app:layout_constraintStart_toStartOf="@+id/productNameTV"
         app:layout_constraintTop_toBottomOf="@+id/productNameTV"
         app:layout_constraintVertical_bias="0.5"
-        tools:text="The staple of lavender juice" />
+        tools:text="@tools:sample/lorem/random" />
 
 
     <TextView
